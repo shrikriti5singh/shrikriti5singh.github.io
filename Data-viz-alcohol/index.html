@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="../Data-viz-alcohol/style.css">
+
+        <!-- Bootstrap CSS -->
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script><script src="https://d3js.org/d3.v6.min.js"></script>
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+        <script src="https://code.highcharts.com/modules/sankey.js"></script>
+        <script src="https://code.highcharts.com/modules/organization.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" style="background-color: #7cb5ec !important;">
+            <div class="container-fluid justify-content-center">
+                <a class="navbar-brand" href="#">
+                    <h1 class="header-title" style="font-family: Lato;
+                            font-weight: 500;
+                            color: white;">
+                        Consumption and Conseqeunces of Alcohol in England
+                    </h1>
+                </a>
+            </div>
+        </nav>
+
+        <div class="main-content">
+
+            <div class="header container" style="margin-bottom: 1rem;
+                    margin-top: 3rem;
+                    position: relative;">
+                <h1 class="header-title" style="font-family: Lato;
+                        font-weight: 500;
+                        line-height: 1.2;
+                        margin-bottom: .5rem;
+                        margin-top: 0;">
+                    Intro
+                    <hr>
+                </h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="header-subtitle" style="
+                        /* color: #fff; */
+                        font-family: Montserrat;
+                        font-size: 1rem;
+                        justify-content: center;">
+                            <span style="
+                            /* Helvetica Neue; */
+                            font-weight: 200;
+                            line-height: 1.2;
+                            margin-bottom: .5rem;
+                            margin-top: 0;
+                            font-size: 1.9rem;">A</span>t all times in almost any time period, alcohol has been consumed to relax, socialize, and/or celebrate. 
+                            So much so that it has become a part of many social and cultural practices. 
+                            But do the consumers realize the other side of alcohol? 
+                            This data story will try to visualize the side which shows the consumption pattern in the UK, 
+                            the number of lives it has claimed, and the suffering endured as a result.
+                            According to WHO, over 200 health conditions are connected to the harmful use of alcohol. 
+                            These range from road injuries and violence, to cancer and cardiovascular diseases. 
+                            It is also a causal factor in more than 60 medical conditions. 
+                            <!-- <br>
+                            &emsp;One of the worst outcomes of drinking is its affect on children. 
+                            Kids who have parents with an alcohol disorder are posed with a higher risk to develop depression in adulthood. 
+                            A relationship has also been established between parental and adolescent drinking. 
+                            Underage drinking can cause damage to the brain, problems with verbal skills, or even depression. 
+                            It can also seed emotional, behavioral, or social problems later in life. 
+                            Drinking during pregnancy can slow down the development of the baby and increase the chances of miscarriage or stillbirths. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex align-items-stretch">
+                <div class="page-holder">
+                    <div class="px-lg-4 container-fluid">
+                        <!-- top 4 tabs -->
+                        <section class="mb-3 mb-lg-5">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="card-widget h-100" style="display: flex; 
+                                        align-items: center; 
+                                        padding: 1.5rem; 
+                                        border-radius: 50rem;
+                                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
+                                        <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                            box-sizing: border-box;
+                                            background-color: #6610f2!important;
+                                            width: 10px;
+                                            height: 10px;
+                                            border-radius: 50%;
+                                            flex-grow: 0;
+                                            flex-shrink: 0;">
+                                        </div>
+                                        <div class="text">
+                                            <h6 class="mb-0" style="font-weight: 700;
+                                                margin-top: 0;">3 million</h6>
+                                            <span class="text-gray-500">died globally in 2016</span>
+                                        </div>
+                                    </div>
+                                    <!-- <p class="h2">3 million<p class="h5">died globally in 2016</p></p> -->
+                                </div>
+                
+                                <div class="col-3">
+                                    <div class="card-widget h-100" style="display: flex; 
+                                        align-items: center; 
+                                        padding: 1.5rem; 
+                                        border-radius: 50rem;
+                                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
+                                        <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                            box-sizing: border-box;
+                                            background-color: #35b653!important;
+                                            width: 10px;
+                                            height: 10px;
+                                            border-radius: 50%;
+                                            flex-grow: 0;
+                                            flex-shrink: 0;">
+                                        </div>
+                                        <div class="text">
+                                            <h6 class="mb-0"><h6 class="mb-0" style="font-weight: 700;
+                                                margin-top: 0;">UK ranks 24th</h6> in the world for in consumption</h6>
+                                            <!-- <span class="text-gray-500"></span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="col-3">
+                                    <div class="card-widget h-100" style="display: flex; 
+                                        align-items: center; 
+                                        padding: 1.5rem; 
+                                        border-radius: 50rem;
+                                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
+                                        <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                            box-sizing: border-box;
+                                            background-color: #0d6efd!important;
+                                            width: 10px;
+                                            height: 10px;
+                                            border-radius: 50%;
+                                            flex-grow: 0;
+                                            flex-shrink: 0;">
+                                        </div>
+                                        <div class="text">
+                                            <h6 class="mb-0"><h6 class="mb-0" style="font-weight: 700;
+                                                margin-top: 0;">358,000 hospital admissions</h6> in UK 2018/19</h6>
+                                            <!-- <span class="text-gray-500"></span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="col-3">
+                                    <div class="card-widget h-100" style="display: flex; 
+                                        align-items: center; 
+                                        padding: 1.5rem; 
+                                        border-radius: 50rem;
+                                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
+                                        <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                            box-sizing: border-box;
+                                            background-color: #dc3545!important;
+                                            width: 10px;
+                                            height: 10px;
+                                            border-radius: 50%;
+                                            flex-grow: 0;
+                                            flex-shrink: 0;">
+                                        </div>
+                                        <div class="text">
+                                            <h6 class="mb-0"><h6 class="mb-0" style="font-weight: 700;
+                                                margin-top: 0;">5,698 alcohol specific deaths</h6> in UK 2018</h6>
+                                            <!-- <span class="text-gray-500"></span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- top 4 tabs end -->
+
+                        <section class="mb-4 mb-lg-12" id="country_consumption">
+                            <div class="card-body">
+                                <div class="chart-holder">
+                                    <figure class="highcharts-figure" style="max-width: 1500px;">
+                                        <div id="countryrank"></div>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p class="header-subtitle" style="
+                                    font-family: Montserrat;
+                                    font-size: 1;
+                                    text-align: left;">
+                                    <b>Figure 1:</b> Pure alcohol consumption among persons (age 15+) in litres per capita in 2016
+                                    and estimated consumption projected for 2025. Data is displayed for every country in descending order 
+                                    of consumption. The red bar highlights data for UK. Exact value displayed on hover.
+                                </p>
+                            </div>
+                        </section>
+
+                        <!-- world chart end -->
+
+                        <!-- consumption pattern -->
+                        <section class="mb-4 mb-lg-5" id="consumption_pattern">
+                            <h2 class="section-heading section-heading-ms mb-4 mb-lg-5" style="font-family: Lato;
+                                font-weight: 700;
+                                /* text-transform: uppercase; */
+                                letter-spacing: .2em;
+                                font-size: 1.5rem;
+                                text-align: center;">
+                                Consumption Pattern
+                                <hr>
+                            </h2>
+            
+                            <div class="row">
+                                <div class="mb-4 mb-lg-0 col-lg-12" style="padding: 0% !important;">
+                                    <div class="d-flex justify-content-center">
+                                        <p>
+                                            <iframe
+                                                src="https://public.tableau.com/views/Amountandtypeofconsumption/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:showVizHome=no&:embed=true"
+                                                width="1300" height="700">
+                                            </iframe>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p class="header-subtitle" style="
+                                    font-family: Montserrat;
+                                    font-size: 1;
+                                    text-align: left;">
+                                    <b>Figure 2:</b> Recorded alcohol per capita for people aged over 15 in litres of pure alcohol consumed is 
+                                    displayed on y-axis in the left chart. Data has been recorded from 1961 to 2019. The pie chart is a categorical display of 
+                                    percentage of beverages consumed in 2019.
+                                </p>
+                            </div>
+                        </section>
+                        <!-- consumption pattern end -->
+
+                        <!-- affordability start -->
+                        <section class="mb-4 mb-lg-5 container-fluid" id="affordability_chart">
+                            <h2 class="section-heading section-heading-ms mb-4 mb-lg-5" style="font-family: Lato;
+                                font-weight: 700;
+                                /* text-transform: uppercase; */
+                                letter-spacing: .2em;
+                                font-size: 1.5rem;
+                                text-align: center;">
+                                Affordability Trend With Income and Expenditure
+                                <hr>
+                            </h2>
+                            
+                            <div class="row">                        
+                                <div class="mb-4 mb-lg-0 col-lg-12">
+                                    <div class="col-lg-12 justify-content-center">
+                                        <p class="header-subtitle" style="
+                                                font-family: Montserrat;
+                                                font-size: 1;
+                                                text-align: left;">
+                                                The baseline used for comparison is the year 1987 with its value as 100.
+                                            </p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-9 d-flex justify-content-center">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p width="1000" height="700">
+                                                        <iframe 
+                                                            src="https://public.tableau.com/shared/ZHW4XH2WF?:display_count=n&:origin=viz_share_link:showVizHome=no&:embed=true"
+                                                            width="1000" height="700">
+                                                        </iframe>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12" style="padding: 0%">
+                                                    <p class="header-subtitle" style="
+                                                    font-family: Montserrat;
+                                                    font-size: 1;
+                                                    text-align: left;">
+                                                    <b>Figure 3:</b> Affordability of alcohol index on a per capita basis, real disposable income per adult and 
+                                                    real household disposable income index trend over the years 1987 to 2019. Year 1987 is the baseline index.
+                                                        The alcohol and retail prices index visible on hover.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4 mb-lg-0 col-lg-3">
+
+                                            <p>Long Term Trend</p>
+                                            <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                                <div class="card-widget-body" style="display: flex;
+                                                    align-items: center;
+                                                    flex-grow: 1;">
+                                                    <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                    box-sizing: border-box;
+                                                    background-color: #6610f2!important;
+                                                    width: 10px;
+                                                    height: 10px;
+                                                    border-radius: 50%;
+                                                    flex-grow: 0;
+                                                    flex-shrink: 0;">
+                                                    </div>
+                                                    <div class="text">
+                                                        <h6 class="mb-0">Alcohol is 74%</h6>
+                                                        <span class="text-gray-500">more affordable since 1987</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <p>Last Ten Years (2009 - 2019)</p>
+
+                                            <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                                <div class="card-widget-body" style="display: flex;
+                                                    align-items: center;
+                                                    flex-grow: 1;">
+                                                    <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                    box-sizing: border-box;
+                                                    background-color: #35b653!important;
+                                                    width: 10px;
+                                                    height: 10px;
+                                                    border-radius: 50%;
+                                                    flex-grow: 0;
+                                                    flex-shrink: 0;">
+                                                    </div>
+                                                    <div class="text">
+                                                        <h6 class="mb-0">28% Increase</h6>
+                                                        <span class="text-gray-500">in alcohol price</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                                <div class="card-widget-body" style="display: flex;
+                                                    align-items: center;
+                                                    flex-grow: 1;">
+                                                    <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                    box-sizing: border-box;
+                                                    background-color: #dc3545!important;
+                                                    width: 10px;
+                                                    height: 10px;
+                                                    border-radius: 50%;
+                                                    flex-grow: 0;
+                                                    flex-shrink: 0;">
+                                                    </div>
+                                                    <div class="text">
+                                                        <h6 class="mb-0">7% Growth</h6>
+                                                        <span class="text-gray-500">in disposable income</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                                <div class="card-widget-body" style="display: flex;
+                                                    align-items: center;
+                                                    flex-grow: 1;">
+                                                    <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                    box-sizing: border-box;
+                                                    background-color: #0d6efd!important;
+                                                    width: 10px;
+                                                    height: 10px;
+                                                    border-radius: 50%;
+                                                    flex-grow: 0;
+                                                    flex-shrink: 0;">
+                                                    </div>
+                                                    <div class="text">
+                                                        <h6 class="mb-0">5% Decrease</h6>
+                                                        <span class="text-gray-500">in alcohol price relative to retail price</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- breakdown of expense -->
+                        <section class="mb-4 mb-lg-5 container-fluid" id="expense_breakdown">
+                            <h2 class="section-heading section-heading-ms mb-4 mb-lg-5" style="font-family: Lato;
+                                font-weight: 700;
+                                /* text-transform: uppercase; */
+                                letter-spacing: .2em;
+                                font-size: 1.5rem;
+                                text-align: center;">
+                                Expense Breakdown
+                                <hr>
+                            </h2>
+                            <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="mb-4 mb-lg-0 col-lg-4">
+                                    <div class="card" style="position: relative;
+                                        display: flex;
+                                        flex-direction: column;
+                                        min-width: 0;
+                                        word-wrap: break-word;
+                                        background-color: #fff;
+                                        background-clip: border-box;
+                                        border-radius: 1rem;
+                                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
+
+                                        <div class="card-body">
+                                            <div class="chart-holder">
+                                                <p style="font-family: Montserrat;
+                                                font-size: 1;
+                                                text-align: left;">
+                                                    Since 2017/18 expenditure on all food and drink eaten out has risen by 1.5 per cent. 
+                                                    Expenditure on food and non alcoholic beverages eaten out has risen by 2.0 per cent and 
+                                                    expenditure on alcoholic drinks consumed out has fallen by 1.9 per cent.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 mb-lg-0 col-lg-6" style="padding: 0% !important;">
+                                    <div class="chart-holder">                      
+                                        <figure class="highcharts-figure">
+                                            <div id="newDiv"></div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- affordability end -->
+
+                        <!-- hospital admission -->
+                        <section class="mb-4 mb-lg-5 container-fluid" id="hospital_admissions">
+                            <h2 style="font-family: Lato;
+                                font-weight: 700;
+                                letter-spacing: .2em;
+                                font-size: 1.5rem;
+                                text-align: center;">
+                                Alcohol related hospital admissions
+                                <hr>
+                            </h2>
+
+                            <div class="row justify-content-center">
+                                <p style="font-family: Montserrat;
+                                font-size: 1;
+                                text-align: left;
+                                /* width: 600px; */
+                                ">
+                                A "narrow measure" is used here which estimates the number of hospital admissions which are primarily due to 
+                                alcohol consumption and provides the best indication of trends in alcohol-related hospital admissions. 
+                                These are admissions where an alcohol-related disease, injury or condition was the primary reason for a hospital admission or an 
+                                alcohol-related external cause was recorded in a secondary diagnosis field.
+                                </p>
+
+                            </div>
+
+                            <div class="row" style="margin-top: 2rem;">
+                                <div class="mb-4 mb-lg-0 col-lg-8" style="padding: 0% !important;">
+                                    <div class="chart-holder">                      
+                                        <figure class="highcharts-figure">
+                                            <div id="admissionsDiv"></div>
+                                        </figure>
+                                        <p class="header-subtitle" style="
+                                            font-family: Montserrat;
+                                            font-size: 1;
+                                            text-align: left;">
+                                            <b>Figure 5:</b> Total number of admissions over the years 2004-2019 rounded to nearest ten. Trend lines displayed for male, female and person.
+                                            To remove any category from the figure click on it, click again to bring it back.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4 mb-lg-0 col-lg-4" style="margin-top: 15rem;">
+                                    <div class="card" style="position: relative;
+                                        display: flex;
+                                        flex-direction: column;
+                                        min-width: 0;
+                                        word-wrap: break-word;
+                                        background-color: #fff;
+                                        background-clip: border-box;
+                                        border-radius: 1rem;
+                                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);">
+
+                                        <div class="card-body">
+                                            <div class="chart-holder">
+                                                <p class="text-muted" style="font-family: Montserrat;
+                                                font-size: 0.8rem !important;
+                                                text-align: left;">
+                                                    Time series data prior to 2008/09 were calculated by the Health and Social Care Information Centre (HSCIC) using a methodology which may not be consistent with later years calculated by Public Health England.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 5rem;">
+                                <h2 style="font-family: Lato;
+                                    font-weight: 700;
+                                    letter-spacing: .2em;
+                                    font-size: 1.5rem;
+                                    text-align: center;">
+                                    Admissions by Primary Diagnosis
+                                    <hr>
+                                </h2>
+                                <div class="col-lg-4" style="margin-top: 5rem;">
+                                    <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #6610f2!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">23% admissions</h6>
+                                                <span class="text-gray-500">were for cancer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #dc3545!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">27% admissions</h6>
+                                                <span class="text-gray-500">for unintentional injuries</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4 mb-lg-0 col-lg-8" style="padding: 0% !important;">
+                                    <div class="row">
+                                        <p class="header-subtitle" style="
+                                            font-family: Montserrat;
+                                            font-size: 1;
+                                            text-align: left;
+                                            padding: 0% !important;">
+                                            <b>Figure 6:</b> Number of admissions by primary diagnosis for wholly and partially attributable conditions. 
+                                            The type of problems and it's sub-category is stacked in the bars.
+                                        </p>
+                                        <p width="1000" height="600">
+                                            <iframe src="https://public.tableau.com/views/AdmissionsbyPrimaryDiagnosis/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:showVizHome=no&:embed=true"
+                                                    width="1000" height="600">
+                                            </iframe>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                        <!-- hospital admissions end -->
+
+
+                        <!-- alcohol specific deaths -->
+                        <section class="mb-4 mb-lg-5" id="specific_deaths">
+                            <h2 style="font-family: Lato;
+                                font-weight: 700;
+                                letter-spacing: .2em;
+                                font-size: 1.5rem;
+                                text-align: center;">
+                                Alcohol Specific Deaths
+                                <hr>
+                            </h2>
+                            <!-- using highcharts -->
+
+                            <div class="row justify-content-center">
+                                
+                                <div class="col-xxl-3" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                ">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #6610f2!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">18.6% increase</h6>
+                                                <span class="text-gray-500">in death rate for 2020 than 2019</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-3" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin-left: 2rem;">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #0d6efd!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">14 deaths per 100,000 people</h6>
+                                                <span class="text-gray-500">in 2020</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-3" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin-left: 2rem;">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #dc3545!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">Did pandemic accelerate</h6>
+                                                <h6 class="mb-0">the fatality rate?</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                            </div>
+                            <div class="row justify-content-center" style="margin-top: 3rem;">
+                                <div class="col-lg-8">
+                                    <figure class="highcharts-figure">
+                                        <div id="deathsAllYears"></div>
+                                    </figure>
+                                </div>
+
+                            </div>
+
+                            <h2 class="section-heading section-heading-ms mb-4 mb-lg-5" style="font-family: Lato;
+                                font-weight: 700;
+                                /* text-transform: uppercase; */
+                                letter-spacing: .2em;
+                                font-size: 1.5rem;
+                                text-align: center;
+                                margin-top: 3rem;">
+                                Deaths registered in 2020
+                                <hr>
+                            </h2>
+                            <div class="row container-fluid">
+                                <div class="w-25 p-3" id="genderP" style="overflow: scroll;">
+                                    <figure class="highcharts-figure">
+                                        <div id="genderPie"></div>
+                                    </figure>
+                                </div>
+                                <div class="w-75 p-3" id="ageRangeC">
+                                    <figure class="highcharts-figure">
+                                        <div id="highc"></div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- alcohol specific deaths end -->
+
+                        <!-- region -->
+                        <section class="mb-4 mb-lg-5 container-fluid" id="region_wise">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h2 style="font-family: Lato;
+                                        font-weight: 700;
+                                        letter-spacing: .2em;
+                                        font-size: 1.5rem;
+                                        text-align: center;">
+                                        Region Wise Fatality in 2020
+                                        <hr>
+                                    </h2>
+                                    <iframe title="Region Wise Fatality" aria-label="Map" id="datawrapper-chart-a4sKA" 
+                                    src="https://datawrapper.dwcdn.net/a4sKA/1/" scrolling="no" frameborder="0" 
+                                    style="width: 0; min-width: 100% !important; border: none;" height="686"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(e){if(void 0!==e.data["datawrapper-height"]){var t=document.querySelectorAll("iframe");for(var a in e.data["datawrapper-height"])for(var r=0;r<t.length;r++){if(t[r].contentWindow===e.source)t[r].style.height=e.data["datawrapper-height"][a]+"px"}}}))}();
+                                    </script>
+                                </div>
+                                <div class="col-lg-4" style="margin-top: 5rem;">
+                                    <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #dc3545!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">33.1% increase for the West Midlands</h6>
+                                                <span class="text-gray-500">alcohol-specific death rate than 2019</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #0d6efd!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">North East has highest death rate</h6>
+                                                <span class="text-gray-500">for seventh consecutive year</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-10" style="display: flex; 
+                                                align-items: center; 
+                                                padding: 1.5rem; 
+                                                border-radius: 50rem;
+                                                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                                height: 91.91px !important;
+                                                margin: 5%;">
+                                        <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #35b653!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">25.3% increase in death rate</h6>
+                                                <span class="text-gray-500">in London</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-10" style="display: flex; 
+                                        align-items: center; 
+                                        padding: 1.5rem; 
+                                        border-radius: 50rem;
+                                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                                        height: 91.91px !important;
+                                        margin: 5%;">
+                                      <div class="card-widget-body" style="display: flex;
+                                            align-items: center;
+                                            flex-grow: 1;">
+                                            <div class="dot me-3 bg-indigo" style="margin-right: 1rem!important;
+                                                box-sizing: border-box;
+                                                background-color: #6610f2!important;
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 50%;
+                                                flex-grow: 0;
+                                                flex-shrink: 0;">
+                                            </div>
+                                            <div class="text">
+                                                <h6 class="mb-0">Male death rate in London 15.1</h6>
+                                                <span class="text-gray-500">over three times the female death rate of 5.0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <section class="mb-4 mb-lg-5 container-fluid" id="region_wise">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h2 style="font-family: Lato;
+                                        font-weight: 700;
+                                        letter-spacing: .2em;
+                                        font-size: 1.5rem;
+                                        text-align: left;">
+                                        Conclusion
+                                        <hr>
+                                    </h2>
+
+                                    <p class="header-subtitle" style="
+                                        font-family: Montserrat;
+                                        font-size: 1;
+                                        text-align: left;
+                                        padding: 0% !important;
+                                        justify-content: center !important;">
+                                        <span style="
+                                        /* Helvetica Neue; */
+                                        font-weight: 200;
+                                        line-height: 1.2;
+                                        margin-bottom: .5rem;
+                                        margin-top: 0;
+                                        font-size: 1.9rem;">W</span>ith all the data and trends covered, it can be concluded that the alcohol-attributable diseases continue to burden health systems. The story tries to highlight the key features of consumption and the repercussions of alcohol. It shows the adverse effect of pandemic through death rates. It also establishes that the expenditure percentage on alcohol has been increasing with income. The analysis presented here can hopefully give a new perspective to consumers motivating them to act.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- <script src="/javascripts/my_script.js"></script> -->
+    <script src="../Data-viz-alcohol/javascripts/highcDeathsChart.js"></script>
+    <script src="../Data-viz-alcohol/javascripts/expenseBreakdown.js"></script>
+    <script src="../Data-viz-alcohol/javascripts/highcadmissions.js"></script>
+</html>
